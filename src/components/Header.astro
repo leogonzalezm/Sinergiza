@@ -1,0 +1,112 @@
+---
+const navItems = [
+  { label: 'Soluciones', href: '/soluciones' },
+  { label: 'Proceso', href: '/proceso' },
+  { label: 'Tecnología', href: '/tecnologia' },
+  { label: 'Casos', href: '/casos' },
+  { label: 'Artículos', href: '/articulos' },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-ivory/80 backdrop-blur-xl">
+  <nav class="container-wide flex items-center justify-between h-[72px]">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3 group">
+      <img src="/logo-sinergiza.svg" alt="Sinergiza" class="h-9 w-auto" />
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden lg:flex items-center gap-8">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="text-small font-medium text-slate hover:text-carbon transition-colors duration-[var(--duration-fast)]"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <div class="flex items-center gap-4">
+      <a
+        href="/contacto"
+        class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-signal text-white text-small font-medium rounded-[var(--radius-lg)] hover:bg-signal-dark transition-colors duration-[var(--duration-fast)]"
+      >
+        Agendar diagnóstico
+      </a>
+
+      <!-- Mobile menu toggle -->
+      <button
+        id="mobile-toggle"
+        type="button"
+        class="lg:hidden flex flex-col gap-1.5 p-2"
+        aria-label="Abrir menú"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+      >
+        <span class="block w-5 h-0.5 bg-carbon transition-transform"></span>
+        <span class="block w-5 h-0.5 bg-carbon transition-opacity"></span>
+        <span class="block w-5 h-0.5 bg-carbon transition-transform"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-border-light bg-ivory">
+    <ul class="container-wide py-4 flex flex-col gap-4">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block text-body font-medium text-carbon hover:text-signal transition-colors"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+      <li class="pt-2 border-t border-border-light">
+        <a
+          href="/contacto"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-signal text-white text-small font-medium rounded-[var(--radius-lg)]"
+        >
+          Agendar diagnóstico
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-[72px]"></div>
+
+<script>
+  const toggle = document.getElementById('mobile-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const body = document.body;
+  const links = menu?.querySelectorAll('a') ?? [];
+
+  const setMenuState = (isOpen) => {
+    menu?.classList.toggle('hidden', !isOpen);
+    toggle?.setAttribute('aria-expanded', String(isOpen));
+    body.classList.toggle('menu-open', isOpen);
+  };
+
+  toggle?.addEventListener('click', () => {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    setMenuState(!isExpanded);
+  });
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setMenuState(false);
+    }
+  });
+</script>

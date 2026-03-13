@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Integraciones y automatización" description="Conectamos sistemas, APIs y procesos para reducir fricción operativa y trabajo manual.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow max-w-3xl">
+      <FadeIn client:load>
+        <Badge label="Integraciones" variant="signal" />
+        <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">Conectamos sistemas para que tu operación fluya mejor.</h1>
+        <p class="text-body-lg text-slate leading-relaxed">
+          Integramos CRMs, ERPs, sitios, medios de pago y APIs para que la información deje de rebotar entre planillas, correos y tareas manuales.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 surface-box">
+        <h2 class="text-h4 font-heading font-semibold mb-3">Qué integramos</h2>
+        <p class="text-small text-slate">CRMs, ERPs, plataformas ecommerce, pasarelas de pago, formularios, dashboards y servicios de terceros vía API o webhooks.</p>
+      </div>
+      <div class="p-6 surface-box">
+        <h2 class="text-h4 font-heading font-semibold mb-3">Qué mejora</h2>
+        <p class="text-small text-slate">Menos retrabajo, datos más consistentes, menor dependencia de tareas manuales y mayor visibilidad del proceso completo.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

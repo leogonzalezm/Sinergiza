@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon?: string;
+  href?: string;
+}
+
+const { title, description, icon, href } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  href={href}
+  class:list={[
+    'group block p-6 surface-box',
+    'transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)]',
+    href && 'hover:-translate-y-0.5 hover:shadow-lg cursor-pointer',
+  ]}
+>
+  {icon && (
+    <div class="w-10 h-10 mb-4 flex items-center justify-center rounded-[var(--radius-lg)] bg-signal/8 text-signal" set:html={icon} />
+  )}
+  <h3 class="text-h4 font-heading font-semibold mb-2 group-hover:text-signal transition-colors">
+    {title}
+  </h3>
+  <p class="text-small text-slate leading-relaxed">
+    {description}
+  </p>
+</Tag>

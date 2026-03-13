@@ -1,0 +1,401 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import TimelineStep from '../components/ui/TimelineStep.astro';
+import StackGroup from '../components/ui/StackGroup.astro';
+import FadeIn from '../components/motion/FadeIn.tsx';
+
+const icons = {
+  APP: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+  AI: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>',
+  API: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg>',
+  ECM: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+  UX: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>',
+  OPS: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>',
+};
+
+const solutions = [
+  {
+    icon: icons.APP,
+    title: 'Desarrollo a medida',
+    description: 'Aplicaciones web con lógica propia, arquitectura limpia y escalabilidad real para operaciones que ya no caben en una plantilla.',
+    href: '/soluciones/desarrollo-a-medida',
+  },
+  {
+    icon: icons.AI,
+    title: 'IA aplicada',
+    description: 'Asistentes, automatización documental, clasificación y copilotos internos implementados con un caso de uso concreto detrás.',
+    href: '/soluciones/ia-aplicada',
+  },
+  {
+    icon: icons.API,
+    title: 'Integraciones y automatización',
+    description: 'Conexión entre CRMs, ERPs, medios de pago y APIs para eliminar trabajo manual y mejorar continuidad operativa.',
+    href: '/soluciones/integraciones',
+  },
+  {
+    icon: icons.ECM,
+    title: 'Ecommerce y plataformas',
+    description: 'Tiendas, catálogos y portales robustos con foco en conversión, autoadministración y rendimiento.',
+    href: '/soluciones/ecommerce',
+  },
+  {
+    icon: icons.UX,
+    title: 'Diseño UX/UI',
+    description: 'Interfaces claras y accionables para que el usuario entienda, confíe y complete la tarea sin fricción innecesaria.',
+    href: '/soluciones/ux-ui',
+  },
+  {
+    icon: icons.OPS,
+    title: 'Evolución continua',
+    description: 'Soporte, nuevas funcionalidades, optimización y monitoreo para que la solución siga mejorando después del lanzamiento.',
+    href: '/soluciones/evolucion-continua',
+  },
+];
+
+const businessOutcomes = [
+  {
+    title: 'Vender mejor',
+    description: 'Sitios, ecommerce y experiencias digitales que explican mejor tu oferta y convierten con menos fricción.',
+  },
+  {
+    title: 'Operar mejor',
+    description: 'Automatizaciones, plataformas internas e integraciones que ahorran tiempo y reducen trabajo manual.',
+  },
+  {
+    title: 'Escalar mejor',
+    description: 'Arquitectura, datos e IA aplicada para crecer sin que los procesos se transformen en cuello de botella.',
+  },
+];
+
+const featuredCases = [
+  {
+    title: 'Portal operativo con roles y trazabilidad',
+    challenge: 'La operación dependía de planillas, correos cruzados y seguimiento manual de estados.',
+    outcome: 'Diseño de un portal interno con permisos, historial, aprobaciones y visibilidad operativa en tiempo real.',
+    stack: 'React, Node.js, PostgreSQL',
+  },
+  {
+    title: 'Integración comercial entre web, CRM y pagos',
+    challenge: 'Leads, seguimiento y pagos quedaban repartidos entre herramientas inconexas.',
+    outcome: 'Flujo integrado para captación, seguimiento comercial y conciliación automática de pagos.',
+    stack: 'APIs, Webhooks, HubSpot, Stripe',
+  },
+  {
+    title: 'Asistente IA para soporte interno',
+    challenge: 'El equipo perdía tiempo buscando manuales, políticas y respuestas repetidas en múltiples documentos.',
+    outcome: 'Asistente con base de conocimiento y recuperación contextual para responder más rápido y con menos ruido.',
+    stack: 'OpenAI, Python, RAG',
+  },
+];
+
+const processSteps = [
+  { step: '01', title: 'Descubrimiento', description: 'Entendemos tu negocio, tus procesos y tus objetivos antes de proponer herramientas o presupuestos.' },
+  { step: '02', title: 'Definición', description: 'Aterrizamos alcance, arquitectura, stack y entregables con una propuesta clara y defendible.' },
+  { step: '03', title: 'Diseño', description: 'Definimos flujos e interfaz para validar la experiencia antes de entrar a desarrollo.' },
+  { step: '04', title: 'Desarrollo', description: 'Construimos por iteraciones, con visibilidad real del avance y puntos de validación constantes.' },
+  { step: '05', title: 'Lanzamiento', description: 'Probamos, optimizamos y desplegamos con foco en rendimiento, seguridad y adopción.' },
+  { step: '06', title: 'Evolución', description: 'Medimos uso, ajustamos prioridades y seguimos mejorando según resultados reales.' },
+];
+
+const stacks = [
+  { name: 'Frontend', items: ['React', 'Vue', 'Astro', 'Next.js', 'Tailwind CSS'] },
+  { name: 'Backend', items: ['Node.js', 'Python', 'Go', 'Express', 'FastAPI'] },
+  { name: 'Datos e IA', items: ['OpenAI', 'Anthropic', 'Gemini', 'LangChain', 'MCP'] },
+  { name: 'Integraciones', items: ['REST APIs', 'Webhooks', 'Zapier', 'HubSpot', 'Stripe'] },
+  { name: 'CMS', items: ['WordPress', 'WooCommerce', 'Headless CMS'] },
+  { name: 'Cloud & DevOps', items: ['Vercel', 'AWS', 'Google Cloud', 'Docker', 'GitHub'] },
+];
+
+const faqs = [
+  {
+    q: '¿Solo trabajan con WordPress?',
+    a: 'No. WordPress sigue siendo útil cuando el proyecto necesita velocidad y autoadministración. Pero cuando hay lógica de negocio, integraciones o IA, diseñamos una solución a medida con el stack adecuado.',
+  },
+  {
+    q: '¿Cómo deciden qué tecnología usar?',
+    a: 'Partimos del problema: complejidad, escalabilidad, integraciones, presupuesto y velocidad de salida. Luego recomendamos la arquitectura que mejor resuelve eso, aunque cambie de un proyecto a otro.',
+  },
+  {
+    q: '¿Pueden integrar inteligencia artificial en mi negocio?',
+    a: 'Sí. Lo hacemos en casos concretos: asistentes con base de conocimiento, automatización documental, clasificación, análisis y copilotos internos. La IA entra cuando mejora el proceso, no para adornar la propuesta.',
+  },
+  {
+    q: '¿Qué pasa después del lanzamiento?',
+    a: 'Podemos seguir iterando con soporte técnico, mejoras priorizadas, monitoreo y nuevas funcionalidades. Vemos el lanzamiento como el comienzo del ciclo útil de la solución.',
+  },
+];
+---
+
+<Layout title="Soluciones digitales a medida">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-[var(--spacing-section)] bg-ivory relative overflow-hidden">
+    <div class="container-wide relative">
+      <div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.4fr)_minmax(320px,0.9fr)] gap-12 items-start">
+        <FadeIn client:load>
+          <div class="max-w-3xl">
+            <Badge label="Agencia de desarrollo digital" variant="signal" />
+
+            <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance max-w-3xl">
+              Tecnología que se adapta a tu negocio,
+              <span class="text-signal">no al revés.</span>
+            </h1>
+
+            <p class="text-body-lg text-slate max-w-2xl mb-8 leading-relaxed">
+              Aplicaciones web, integraciones, ecommerce e inteligencia artificial aplicada para empresas que necesitan vender mejor, operar mejor y escalar sin improvisar.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mb-8">
+              <Button href="/contacto" variant="primary" size="lg">
+                Agendar diagnóstico
+              </Button>
+              <Button href="/casos" variant="secondary" size="lg">
+                Ver ejemplos de solución
+              </Button>
+            </div>
+
+            <div class="flex flex-wrap gap-3">
+              <span class="chip">React</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">Python</span>
+              <span class="chip">Go</span>
+              <span class="chip">WordPress</span>
+              <span class="chip">IA aplicada</span>
+            </div>
+          </div>
+        </FadeIn>
+
+        <FadeIn client:load delay={0.1}>
+          <aside class="p-6 md:p-8 surface-box">
+            <span class="chip-muted mb-4">
+              Qué resolvemos
+            </span>
+            <div class="space-y-5">
+              <div class="pb-5 border-b border-border-light">
+                <p class="text-h4 font-heading font-semibold mb-1">Canales digitales que no convierten</p>
+                <p class="text-small text-slate">Replanteamos arquitectura, UX y contenido para que el sitio deje de ser solo presencia y pase a ser una herramienta comercial.</p>
+              </div>
+              <div class="pb-5 border-b border-border-light">
+                <p class="text-h4 font-heading font-semibold mb-1">Procesos manuales que frenan la operación</p>
+                <p class="text-small text-slate">Conectamos sistemas, automatizamos flujos y reducimos fricción entre ventas, operación y soporte.</p>
+              </div>
+              <div>
+                <p class="text-h4 font-heading font-semibold mb-1">Oportunidades de IA poco aterrizadas</p>
+                <p class="text-small text-slate">Traducimos la idea en un caso de uso concreto, una arquitectura viable y un plan de implementación realista.</p>
+              </div>
+            </div>
+          </aside>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-surface border-y border-border-light overflow-hidden">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Impacto esperado" label="Tres resultados que solemos perseguir" />
+      </FadeIn>
+      <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr_0.9fr] gap-6 mt-8 items-stretch">
+        {businessOutcomes.map((item, index) => (
+          <FadeIn client:load delay={index * 0.07}>
+            <div class:list={[
+              'p-6 h-full',
+              index === 0 ? 'rounded-[var(--radius-xl)] bg-carbon text-white' : 'surface-box-muted',
+            ]}>
+              <span class:list={[
+                'mb-4 min-w-12 px-3',
+                index === 0 ? 'chip-dark' : 'chip-muted',
+              ]}>
+                0{index + 1}
+              </span>
+              <h3 class:list={['text-h4 font-heading font-semibold mb-2', index === 0 ? 'text-white' : 'text-carbon']}>
+                {item.title}
+              </h3>
+              <p class:list={['text-small leading-relaxed', index === 0 ? 'text-white/70' : 'text-slate']}>
+                {item.description}
+              </p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="soluciones" class="section-padding">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Qué hacemos" label="Capacidades para distintos niveles de complejidad" />
+        <p class="text-body-lg text-slate max-w-2xl mb-12 -mt-4">
+          No trabajamos con una única receta. Partimos del problema y elegimos el enfoque tecnológico que mejor lo resuelve.
+        </p>
+      </FadeIn>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {solutions.map((sol, i) => (
+          <FadeIn client:load delay={i * 0.08}>
+            <Card icon={sol.icon} title={sol.title} description={sol.description} href={sol.href} />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-carbon text-white overflow-hidden relative">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="mb-8">
+          <span class="block text-xs font-semibold uppercase tracking-[0.18em] text-signal-light mb-3">Prueba</span>
+          <h2 class="text-h2 md:text-h1 font-heading font-bold text-white text-balance">Qué tipo de soluciones solemos diseñar</h2>
+        </div>
+      </FadeIn>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+        {featuredCases.map((item, index) => (
+          <FadeIn client:load delay={index * 0.08}>
+            <article class="relative h-full p-6 surface-box-dark overflow-hidden">
+              <span class="chip-dark mb-3">{item.stack}</span>
+              <h3 class="text-h4 font-heading font-semibold text-white mb-3">{item.title}</h3>
+              <p class="text-small text-white/60 leading-relaxed mb-4">
+                <strong class="text-white">Desafío:</strong> {item.challenge}
+              </p>
+              <p class="text-small text-white/70 leading-relaxed">
+                <strong class="text-white">Enfoque:</strong> {item.outcome}
+              </p>
+            </article>
+          </FadeIn>
+        ))}
+      </div>
+      <FadeIn client:load delay={0.2}>
+        <div class="mt-10">
+          <Button href="/casos" variant="secondary" size="lg" class="border-white/20 bg-transparent text-white hover:border-white/40 hover:text-white">
+            Ver casos y formatos de proyecto
+          </Button>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="section-padding bg-ivory-warm">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Elegir bien" label="No todo proyecto necesita el mismo enfoque" />
+      </FadeIn>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+        <FadeIn client:load>
+          <div class="p-6 surface-box h-full">
+            <span class="chip-muted mb-4">CMS</span>
+            <h3 class="text-h4 font-heading font-semibold mb-2">Cuando WordPress sí es la respuesta</h3>
+            <p class="text-small text-slate leading-relaxed">Sitios de contenido, blogs, portafolios y tiendas con alcance controlado donde importa velocidad de implementación y autoadministración.</p>
+          </div>
+        </FadeIn>
+        <FadeIn client:load delay={0.08}>
+          <div class="p-6 surface-box h-full">
+            <span class="chip-muted mb-4">Custom</span>
+            <h3 class="text-h4 font-heading font-semibold mb-2">Cuando conviene desarrollo a medida</h3>
+            <p class="text-small text-slate leading-relaxed">Plataformas, dashboards, portales con permisos, lógica de negocio compleja, integraciones profundas y necesidades de escala real.</p>
+          </div>
+        </FadeIn>
+        <FadeIn client:load delay={0.16}>
+          <div class="p-6 surface-box h-full">
+            <span class="chip-muted mb-4">AI</span>
+            <h3 class="text-h4 font-heading font-semibold mb-2">Cuando la IA genera retorno</h3>
+            <p class="text-small text-slate leading-relaxed">Automatización documental, búsqueda inteligente, clasificación, asistentes internos y tareas repetitivas donde hay datos y un proceso claro.</p>
+          </div>
+        </FadeIn>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso" class="section-padding bg-surface border-y border-border-light">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12">
+        <FadeIn client:load>
+          <div>
+            <SectionHeading eyebrow="Cómo trabajamos" label="Un proceso claro, sin cajas negras" />
+            <p class="text-body-lg text-slate max-w-xl -mt-4">
+              Cada etapa tiene entregables concretos. Sabes qué se está haciendo, por qué y qué decisión se toma después.
+            </p>
+          </div>
+        </FadeIn>
+        <div class="max-w-xl">
+          {processSteps.map((s, i) => (
+            <FadeIn client:load delay={i * 0.05}>
+              <TimelineStep step={s.step} title={s.title} description={s.description} isLast={i === processSteps.length - 1} />
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologia" class="section-padding">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Stack tecnológico" label="Tecnologías actuales, elegidas con criterio" />
+        <p class="text-body-lg text-slate max-w-2xl mb-12 -mt-4">
+          Dominamos un rango amplio de tecnologías para tomar decisiones correctas según complejidad, presupuesto y tiempo de salida.
+        </p>
+      </FadeIn>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {stacks.map((stack, i) => (
+          <FadeIn client:load delay={i * 0.06}>
+            <StackGroup name={stack.name} items={stack.items} />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section-padding bg-surface border-y border-border-light">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Preguntas frecuentes" label="Lo que normalmente se pregunta antes de partir" />
+      </FadeIn>
+
+      <div class="max-w-2xl mt-8 divide-y divide-border">
+        {faqs.map((faq, i) => (
+          <FadeIn client:load delay={i * 0.05}>
+            <details class="group py-6">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-body font-semibold font-heading text-carbon hover:text-signal transition-colors">
+                {faq.q}
+                <span class="text-slate group-open:rotate-45 transition-transform duration-[var(--duration-normal)] text-body-lg ml-4 shrink-0">+</span>
+              </summary>
+              <p class="mt-3 text-small text-slate leading-relaxed">
+                {faq.a}
+              </p>
+            </details>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 md:text-h1 font-heading font-bold mb-4 text-white text-balance">
+          ¿Tienes un proyecto en mente?
+        </h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Cuéntanos qué necesitas. Analizamos tu caso y te proponemos una ruta clara: stack, alcance y siguiente paso recomendado.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+            Agendar diagnóstico
+          </a>
+          <a href="/proceso" class="inline-flex items-center gap-2 px-6 py-3 border border-white/30 text-white font-medium rounded-[var(--radius-lg)] hover:bg-white/10 transition-colors">
+            Ver cómo trabajamos
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

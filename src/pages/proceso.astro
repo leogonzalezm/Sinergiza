@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import TimelineStep from '../components/ui/TimelineStep.astro';
+import FadeIn from '../components/motion/FadeIn.tsx';
+
+const steps = [
+  {
+    step: '01',
+    title: 'Descubrimiento',
+    description: 'Sesión de diagnóstico donde entendemos tu negocio, tus procesos actuales, los problemas que quieres resolver y los resultados que esperas. Sin costo ni compromiso.',
+  },
+  {
+    step: '02',
+    title: 'Definición y propuesta',
+    description: 'Analizamos opciones, seleccionamos el stack tecnológico adecuado y entregamos una propuesta con alcance, arquitectura, cronograma y presupuesto detallado.',
+  },
+  {
+    step: '03',
+    title: 'Diseño UX/UI',
+    description: 'Diseñamos la experiencia de usuario, los flujos y la interfaz completa. Validamos contigo antes de escribir la primera línea de código.',
+  },
+  {
+    step: '04',
+    title: 'Desarrollo iterativo',
+    description: 'Construimos en ciclos cortos con entregas parciales cada 1-2 semanas. Puedes ver, probar y dar feedback en cada iteración.',
+  },
+  {
+    step: '05',
+    title: 'QA y lanzamiento',
+    description: 'Pruebas exhaustivas de funcionalidad, rendimiento y seguridad. Despliegue en producción con monitoreo activo desde el primer momento.',
+  },
+  {
+    step: '06',
+    title: 'Evolución y soporte',
+    description: 'Medimos resultados reales, iteramos funcionalidades según uso y datos, y mantenemos la solución actualizada y optimizada.',
+  },
+];
+---
+
+<Layout title="Proceso" description="Descubrimiento, diseño, desarrollo iterativo y evolución continua. Así trabajamos en Sinergiza.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-3xl">
+          <SectionHeading
+            eyebrow="Cómo trabajamos"
+            label="Un proceso diseñado para que siempre sepas dónde estás"
+          />
+          <p class="text-body-lg text-slate max-w-2xl -mt-4">
+            Sin cajas negras. Cada etapa tiene entregables concretos, puntos
+            de validación y transparencia total sobre avance e inversión.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow">
+      <div class="max-w-2xl">
+        {steps.map((s, i) => (
+          <FadeIn client:load delay={i * 0.06}>
+            <TimelineStep
+              step={s.step}
+              title={s.title}
+              description={s.description}
+              isLast={i === steps.length - 1}
+            />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 font-heading font-bold text-white mb-4">
+          El primer paso es una conversación
+        </h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Agenda un diagnóstico gratuito de 30 minutos. Entendemos tu caso,
+          te damos feedback honesto y, si hay match, armamos una propuesta.
+        </p>
+        <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+          Agendar diagnóstico gratuito
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

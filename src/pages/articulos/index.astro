@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+import { getArticles } from '../../lib/wordpress';
+
+const articles = await getArticles();
+
+const upcomingTopics = [
+  'Cómo decidir entre WordPress, desarrollo a medida e IA aplicada',
+  'Qué integraciones suelen destrabar más rápido una operación comercial',
+  'Cómo convertir un sitio corporativo en una herramienta real de captación',
+  'Qué proyectos sí justifican una solución con inteligencia artificial',
+];
+---
+
+<Layout title="Artículos" description="Temas, enfoques y criterios sobre desarrollo a medida, IA aplicada, integraciones y diseño de soluciones digitales.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Artículos" label="Ideas, criterios y decisiones detrás de una buena solución digital" />
+        <p class="text-body-lg text-slate max-w-2xl -mt-4">
+          Contenido útil para clientes y equipos que necesitan entender mejor cómo decidir, priorizar y ejecutar proyectos digitales.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow">
+      {articles.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {articles.map((article, i) => (
+            <FadeIn client:load delay={i * 0.06}>
+              <a href={`/articulos/${article.slug}`} class="group block surface-box overflow-hidden hover:shadow-lg transition-all duration-[var(--duration-normal)] ease-[var(--ease-out)] hover:-translate-y-0.5">
+                {article.coverImage?.url && (
+                  <div class="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={article.coverImage.url}
+                      alt={article.coverImage.alt || article.title}
+                      class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-[var(--duration-normal)]"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class="p-6">
+                  <div class="flex items-center gap-3 mb-3">
+                    {article.category && <span class="chip">{article.category}</span>}
+                    <time class="text-xs text-muted" datetime={article.publishedAt}>
+                      {new Date(article.publishedAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    </time>
+                  </div>
+                  <h2 class="text-h4 font-heading font-semibold mb-2 group-hover:text-signal transition-colors">
+                    {article.title}
+                  </h2>
+                  <p class="text-body text-slate leading-relaxed">
+                    {article.excerpt}
+                  </p>
+                </div>
+              </a>
+            </FadeIn>
+          ))}
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {upcomingTopics.map((topic, index) => (
+            <FadeIn client:load delay={index * 0.06}>
+              <article class="p-6 surface-box">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-3">Próximo tema</p>
+                <h2 class="text-h4 font-heading font-semibold">{topic}</h2>
+              </article>
+            </FadeIn>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

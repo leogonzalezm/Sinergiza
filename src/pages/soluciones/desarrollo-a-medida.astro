@@ -1,0 +1,136 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/ui/Button.astro';
+import Badge from '../../components/ui/Badge.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import StackGroup from '../../components/ui/StackGroup.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Desarrollo a medida" description="Aplicaciones web, plataformas y APIs construidas desde cero con el stack tecnológico óptimo para tu negocio.">
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-3xl">
+          <Badge label="Desarrollo a medida" variant="signal" />
+          <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">
+            Software que se adapta a tu negocio, no al revés.
+          </h1>
+          <p class="text-body-lg text-slate max-w-2xl leading-relaxed">
+            Cuando tu operación necesita algo que ninguna plantilla o plugin puede resolver,
+            construimos la solución exacta — con arquitectura limpia, código propio y el
+            stack tecnológico que mejor se ajusta a tu caso.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Cuándo conviene -->
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading
+          eyebrow="¿Cuándo tiene sentido?"
+          label="Un desarrollo a medida es la respuesta cuando..."
+        />
+      </FadeIn>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        {[
+          { title: 'Tu lógica de negocio es única', desc: 'Procesos, reglas, cálculos o flujos que no encajan en herramientas estándar.' },
+          { title: 'Necesitas escalar sin techo', desc: 'Miles de usuarios concurrentes, grandes volúmenes de datos o alta disponibilidad.' },
+          { title: 'Requieres integraciones profundas', desc: 'Conexión nativa con ERPs, CRMs, APIs de terceros o sistemas legacy.' },
+          { title: 'Quieres control total', desc: 'Sin dependencia de plugins, licencias o limitaciones de plataforma.' },
+        ].map((item, i) => (
+          <FadeIn client:load delay={i * 0.08}>
+            <div class="p-6 surface-box">
+              <h3 class="text-h4 font-heading font-semibold mb-2">{item.title}</h3>
+              <p class="text-small text-slate">{item.desc}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué construimos -->
+  <section class="section-padding bg-surface border-y border-border-light">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading
+          eyebrow="Qué construimos"
+          label="Tipos de proyectos que desarrollamos"
+        />
+      </FadeIn>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+        {[
+          'Aplicaciones web SaaS',
+          'Portales con roles y permisos',
+          'Dashboards operativos',
+          'APIs y microservicios',
+          'Sistemas de reservas',
+          'Plataformas de gestión interna',
+          'MVPs para startups',
+          'Herramientas de productividad',
+          'Aplicaciones con procesamiento de datos',
+        ].map((item, i) => (
+          <FadeIn client:load delay={i * 0.04}>
+            <div class="flex items-center gap-3 p-4 rounded-[var(--radius-lg)] bg-ivory">
+              <span class="w-2 h-2 rounded-full bg-signal shrink-0"></span>
+              <span class="text-small font-medium">{item}</span>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stacks -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading
+          eyebrow="Tecnologías"
+          label="El stack lo define tu proyecto"
+        />
+        <p class="text-body-lg text-slate max-w-2xl mb-12 -mt-4">
+          No tenemos una tecnología favorita. Elegimos la combinación que garantiza
+          rendimiento, mantenibilidad y velocidad de desarrollo para tu caso.
+        </p>
+      </FadeIn>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <FadeIn client:load><StackGroup name="Frontend" items={['React', 'Vue', 'Astro', 'Next.js', 'TypeScript']} /></FadeIn>
+        <FadeIn client:load delay={0.06}><StackGroup name="Backend" items={['Node.js', 'Python', 'Go', 'Express', 'FastAPI']} /></FadeIn>
+        <FadeIn client:load delay={0.12}><StackGroup name="Datos" items={['PostgreSQL', 'MongoDB', 'Redis', 'Prisma', 'Drizzle']} /></FadeIn>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 font-heading font-bold text-white mb-4">
+          ¿Tu proyecto necesita desarrollo a medida?
+        </h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Cuéntanos qué quieres lograr. Te ayudamos a definir el alcance, la
+          arquitectura y la inversión realista.
+        </p>
+        <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+          Agendar diagnóstico gratuito
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

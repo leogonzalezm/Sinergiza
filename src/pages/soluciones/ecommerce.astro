@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Ecommerce y plataformas" description="Tiendas, catálogos y plataformas de venta con foco en conversión, operación e integración.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow max-w-3xl">
+      <FadeIn client:load>
+        <Badge label="Ecommerce" variant="signal" />
+        <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">Experiencias de compra más claras y operaciones comerciales más ordenadas.</h1>
+        <p class="text-body-lg text-slate leading-relaxed">
+          Diseñamos tiendas online y plataformas de venta conectadas con tu operación real. Desde WooCommerce bien planteado hasta soluciones con mayor nivel de personalización.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Conversión</h2><p class="text-small text-slate">Mejor estructura de catálogo, ficha de producto, checkout y llamados a la acción.</p></div>
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Operación</h2><p class="text-small text-slate">Inventario, medios de pago, logística y seguimiento conectados con el resto del negocio.</p></div>
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Escala</h2><p class="text-small text-slate">Arquitectura y decisiones pensadas para crecer sin rehacer todo a los pocos meses.</p></div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

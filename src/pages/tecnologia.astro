@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import StackGroup from '../components/ui/StackGroup.astro';
+import FadeIn from '../components/motion/FadeIn.tsx';
+
+const stacks = [
+  { name: 'Frontend', items: ['React', 'Vue', 'Astro', 'Next.js', 'Nuxt', 'Tailwind CSS', 'TypeScript'] },
+  { name: 'Backend', items: ['Node.js', 'Python', 'Go', 'Express', 'FastAPI', 'NestJS'] },
+  { name: 'Bases de datos', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Supabase'] },
+  { name: 'IA y Machine Learning', items: ['OpenAI API', 'Anthropic API', 'Gemini', 'LangChain', 'Pinecone', 'MCP'] },
+  { name: 'Integraciones', items: ['REST APIs', 'GraphQL', 'Webhooks', 'Stripe', 'HubSpot', 'Zapier'] },
+  { name: 'CMS', items: ['WordPress', 'WooCommerce', 'Strapi', 'Headless CMS'] },
+  { name: 'Cloud & Hosting', items: ['Vercel', 'AWS', 'Google Cloud', 'DigitalOcean', 'Cloudflare', 'Railway'] },
+  { name: 'DevOps & Herramientas', items: ['Docker', 'GitHub', 'GitHub Actions', 'CI/CD', 'Git', 'Sentry'] },
+];
+---
+
+<Layout title="Tecnología" description="React, Node.js, Python, Go, IA, WordPress y más. Elegimos el stack correcto según tu proyecto.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-3xl">
+          <SectionHeading
+            eyebrow="Stack tecnológico"
+            label="No tenemos tecnología favorita. Tenemos criterio."
+          />
+          <p class="text-body-lg text-slate max-w-2xl -mt-4">
+            Cada proyecto tiene restricciones distintas: rendimiento, presupuesto,
+            plazos, integraciones, equipo. Dominamos un rango amplio de tecnologías
+            para poder elegir la combinación óptima, no la que tenemos a mano.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {stacks.map((stack, i) => (
+          <FadeIn client:load delay={i * 0.05}>
+            <StackGroup name={stack.name} items={stack.items} />
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Decisión -->
+  <section class="section-padding bg-carbon text-white">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-2xl">
+          <h2 class="text-h2 font-heading font-bold text-white mb-6">
+            ¿Cómo elegimos la tecnología?
+          </h2>
+          <div class="space-y-4 text-white/70 leading-relaxed">
+            <p>
+              Evaluamos cada proyecto con cuatro criterios: <strong class="text-white">complejidad</strong> (¿necesita lógica personalizada o un CMS resuelve?), <strong class="text-white">escala</strong> (¿cuántos usuarios, datos, transacciones?), <strong class="text-white">integración</strong> (¿qué sistemas existentes debe conectar?) y <strong class="text-white">presupuesto</strong> (¿cuál es la inversión realista?).
+            </p>
+            <p>
+              A veces WordPress con un buen tema es la respuesta perfecta. Otras veces necesitas una API en Go con un frontend en React. Y a veces la IA transforma un proceso manual de 4 horas en uno automático de 30 segundos. Lo importante es elegir bien.
+            </p>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 font-heading font-bold text-white mb-4">
+          ¿Quieres saber qué stack necesita tu proyecto?
+        </h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Te lo decimos gratis. Agenda un diagnóstico y te recomendamos la
+          tecnología adecuada con una explicación honesta del porqué.
+        </p>
+        <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+          Agendar diagnóstico gratuito
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

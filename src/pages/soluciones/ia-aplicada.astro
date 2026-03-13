@@ -1,0 +1,137 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+
+const useCases = [
+  {
+    title: 'Asistentes con base de conocimiento',
+    description: 'Chatbots que responden con información real de tu empresa: manuales, políticas, catálogos, precios. No inventan: recuperan y contextualizan.',
+    tag: 'RAG',
+  },
+  {
+    title: 'Automatización documental',
+    description: 'Extracción de datos desde facturas, contratos, formularios y reportes. Clasificación, resumen y enrutamiento automático de documentos.',
+    tag: 'Procesamiento',
+  },
+  {
+    title: 'Clasificación y análisis de datos',
+    description: 'Categorización automática de tickets, leads, productos o feedback. Detección de patrones y anomalías en datos operativos.',
+    tag: 'Análisis',
+  },
+  {
+    title: 'Copilotos operativos',
+    description: 'Asistentes internos que ayudan a tu equipo a buscar información, generar reportes, redactar respuestas o tomar decisiones más rápido.',
+    tag: 'Productividad',
+  },
+  {
+    title: 'Personalización de experiencias',
+    description: 'Recomendaciones inteligentes, contenido dinámico y segmentación automática basada en comportamiento del usuario.',
+    tag: 'UX',
+  },
+  {
+    title: 'Automatización de atención',
+    description: 'Flujos de atención multicanal con IA que escalan a humanos solo cuando es necesario. Reducción real de carga operativa.',
+    tag: 'Soporte',
+  },
+];
+---
+
+<Layout title="IA aplicada" description="Integramos inteligencia artificial para resolver problemas concretos de negocio: automatización, asistentes, análisis de datos y copilotos internos.">
+  <Header slot="header" />
+
+  <!-- Hero -->
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-3xl">
+          <Badge label="IA aplicada" variant="acid" />
+          <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">
+            Inteligencia artificial que resuelve problemas reales, no demos.
+          </h1>
+          <p class="text-body-lg text-slate max-w-2xl leading-relaxed">
+            No vendemos IA como moda. La integramos donde genera impacto medible:
+            automatizar lo repetitivo, potenciar a tu equipo y mejorar la experiencia
+            de tus clientes con soluciones concretas y desplegables.
+          </p>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Enfoque -->
+  <section class="section-padding bg-carbon text-white">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <div class="max-w-2xl">
+          <span class="text-xs font-semibold uppercase tracking-widest text-acid mb-3 block">
+            Nuestro enfoque
+          </span>
+          <h2 class="text-h2 font-heading font-bold text-white mb-6">
+            Empezamos por el problema, no por el modelo.
+          </h2>
+          <div class="space-y-4 text-white/70 text-body leading-relaxed">
+            <p>
+              Antes de elegir GPT, Claude o cualquier modelo, entendemos qué proceso
+              quieres mejorar, qué datos tienes disponibles y qué resultado concreto
+              esperas. Luego diseñamos la solución más simple que funcione.
+            </p>
+            <p>
+              Usamos APIs de OpenAI, Anthropic, modelos open source y frameworks como
+              LangChain según lo que el caso requiera. Sin dogmas, sin sobre-ingeniería.
+            </p>
+          </div>
+        </div>
+      </FadeIn>
+    </div>
+  </section>
+
+  <!-- Casos de uso -->
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading
+          eyebrow="Casos de uso"
+          label="Dónde aplicamos IA con impacto real"
+        />
+      </FadeIn>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        {useCases.map((uc, i) => (
+          <FadeIn client:load delay={i * 0.06}>
+            <div class="p-6 surface-box">
+              <span class="chip-muted mb-4">
+                {uc.tag}
+              </span>
+              <h3 class="text-h4 font-heading font-semibold mb-2">{uc.title}</h3>
+              <p class="text-small text-slate leading-relaxed">{uc.description}</p>
+            </div>
+          </FadeIn>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 font-heading font-bold text-white mb-4 text-balance">
+          ¿La IA puede ayudar a tu negocio?
+        </h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Probablemente sí, pero no en cualquier lado. Te ayudamos a identificar
+          el caso de uso con mayor retorno y a implementar una prueba de concepto rápida.
+        </p>
+        <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+          Explorar oportunidades con IA
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

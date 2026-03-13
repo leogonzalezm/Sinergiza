@@ -1,0 +1,108 @@
+---
+const currentYear = new Date().getFullYear();
+
+const solutions = [
+  { label: 'Desarrollo a medida', href: '/soluciones/desarrollo-a-medida' },
+  { label: 'IA aplicada', href: '/soluciones/ia-aplicada' },
+  { label: 'Integraciones', href: '/soluciones/integraciones' },
+  { label: 'Ecommerce', href: '/soluciones/ecommerce' },
+  { label: 'UX/UI', href: '/soluciones/ux-ui' },
+];
+
+const company = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Casos', href: '/casos' },
+  { label: 'Proceso', href: '/proceso' },
+  { label: 'Tecnología', href: '/tecnologia' },
+  { label: 'Artículos', href: '/articulos' },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<footer class="bg-carbon text-white/70">
+  <div class="container-wide section-padding">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-block mb-4">
+          <img src="/logo-sinergiza.svg" alt="Sinergiza" class="h-8 w-auto brightness-0 invert" />
+        </a>
+        <p class="text-small leading-relaxed mb-6">
+          Diseñamos y desarrollamos soluciones digitales a medida para empresas que necesitan vender, operar y escalar mejor.
+        </p>
+        <a
+          href="mailto:hablemos@sinergiza.cl"
+          class="text-small text-signal-light hover:text-white transition-colors"
+        >
+          hablemos@sinergiza.cl
+        </a>
+        <a
+          href="https://wa.me/56963065167"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block mt-2 text-small text-white/60 hover:text-white transition-colors"
+        >
+          WhatsApp: +56 9 6306 5167
+        </a>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <h4 class="text-small font-semibold text-white uppercase tracking-wider mb-4">
+          Soluciones
+        </h4>
+        <ul class="flex flex-col gap-3">
+          {solutions.map((item) => (
+            <li>
+              <a href={item.href} class="text-small hover:text-white transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="text-small font-semibold text-white uppercase tracking-wider mb-4">
+          Sinergiza
+        </h4>
+        <ul class="flex flex-col gap-3">
+          {company.map((item) => (
+            <li>
+              <a href={item.href} class="text-small hover:text-white transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div>
+        <h4 class="text-small font-semibold text-white uppercase tracking-wider mb-4">
+          ¿Tienes un proyecto?
+        </h4>
+        <p class="text-small leading-relaxed mb-4">
+          Cuéntanos qué necesitas. Analizamos tu caso y te proponemos el enfoque tecnológico adecuado.
+        </p>
+        <a
+          href="/contacto"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-signal text-white text-small font-medium rounded-[var(--radius-lg)] hover:bg-signal-dark transition-colors"
+        >
+          Agendar diagnóstico
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-white/40">
+        &copy; 2018 – {currentYear} Sinergiza Servicios Digitales
+      </p>
+      <a href="/politica-privacidad" class="text-xs text-white/40 hover:text-white/60 transition-colors">
+        Política de privacidad
+      </a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+import { getArticle, getAllSlugs } from '../../lib/wordpress';
+
+export async function getStaticPaths() {
+  const slugs = await getAllSlugs();
+  return slugs.map((s) => ({ params: { slug: s.slug } }));
+}
+
+const { slug } = Astro.params;
+const article = await getArticle(slug!);
+
+if (!article) return Astro.redirect('/articulos');
+---
+
+<Layout title={article.title} description={article.excerpt}>
+  <Header slot="header" />
+
+  <article class="pt-12 pb-[var(--spacing-section)]">
+    <div class="container-narrow max-w-3xl">
+      <FadeIn client:load>
+        <!-- Meta -->
+        <div class="flex items-center gap-3 mb-6">
+          {article.category && <span class="chip">{article.category}</span>}
+          <time class="text-sm text-muted" datetime={article.publishedAt}>
+            {new Date(article.publishedAt).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-h1 font-heading font-bold mb-6 text-balance">
+          {article.title}
+        </h1>
+
+        <p class="text-body-lg text-slate mb-10 max-w-2xl">
+          {article.excerpt}
+        </p>
+      </FadeIn>
+
+      <!-- Cover -->
+      {article.coverImage?.url && (
+        <FadeIn client:load delay={0.1}>
+          <div class="mb-10 rounded-[var(--radius-xl)] overflow-hidden">
+            <img
+              src={article.coverImage.url}
+              alt={article.coverImage.alt || article.title}
+              class="w-full h-auto"
+            />
+          </div>
+        </FadeIn>
+      )}
+
+      <!-- Body -->
+      <FadeIn client:load delay={0.15}>
+        <div class="prose" set:html={article.content || ''} />
+      </FadeIn>
+
+      <!-- Back -->
+      <FadeIn client:load delay={0.2}>
+        <div class="mt-16 pt-8 border-t border-carbon/6">
+          <a href="/articulos" class="text-signal font-medium hover:underline">
+            ← Todos los artículos
+          </a>
+        </div>
+      </FadeIn>
+    </div>
+  </article>
+
+  <Footer slot="footer" />
+</Layout>

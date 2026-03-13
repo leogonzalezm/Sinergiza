@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Evolución continua" description="Soporte, optimización y nuevas funcionalidades para seguir mejorando la solución después del lanzamiento.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow max-w-3xl">
+      <FadeIn client:load>
+        <Badge label="Evolución" variant="signal" />
+        <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">Lanzar no es terminar: es empezar a aprender con uso real.</h1>
+        <p class="text-body-lg text-slate leading-relaxed">
+          Después del lanzamiento, seguimos iterando con soporte, mejoras priorizadas, ajustes de rendimiento y nuevas funcionalidades alineadas con datos y feedback real.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Soporte</h2><p class="text-small text-slate">Correcciones, mantenimiento y acompañamiento técnico continuo.</p></div>
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Optimización</h2><p class="text-small text-slate">Rendimiento, usabilidad y ajustes sobre funcionalidades ya desplegadas.</p></div>
+      <div class="p-6 surface-box"><h2 class="text-h4 font-heading font-semibold mb-3">Nuevas iteraciones</h2><p class="text-small text-slate">Roadmap de mejoras en función de resultados, hipótesis y prioridades del negocio.</p></div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

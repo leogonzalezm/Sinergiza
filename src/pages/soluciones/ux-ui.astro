@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Badge from '../../components/ui/Badge.astro';
+import FadeIn from '../../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Diseño UX/UI" description="Interfaces claras, consistentes y orientadas a conversión, adopción y comprensión rápida.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow max-w-3xl">
+      <FadeIn client:load>
+        <Badge label="UX/UI" variant="signal" />
+        <h1 class="text-h1 md:text-display font-heading font-bold mt-6 mb-6 text-balance">Diseño que ayuda a entender, decidir y actuar.</h1>
+        <p class="text-body-lg text-slate leading-relaxed">
+          Trabajamos la experiencia antes del código: estructura, flujos, jerarquía, mensajes y componentes para que el usuario avance con menos fricción y más claridad.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 surface-box">
+        <h2 class="text-h4 font-heading font-semibold mb-3">Qué diseñamos</h2>
+        <p class="text-small text-slate">Arquitectura de información, wireframes, prototipos, sistemas de diseño y rediseños orientados a conversión o adopción interna.</p>
+      </div>
+      <div class="p-6 surface-box">
+        <h2 class="text-h4 font-heading font-semibold mb-3">Qué buscamos</h2>
+        <p class="text-small text-slate">Reducir carga cognitiva, ordenar la interfaz, hacer visible el siguiente paso y alinear experiencia con objetivos del negocio.</p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

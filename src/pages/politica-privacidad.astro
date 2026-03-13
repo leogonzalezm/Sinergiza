@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+---
+
+<Layout title="Política de privacidad" description="Información básica sobre tratamiento de datos y contacto en Sinergiza.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow max-w-3xl">
+      <SectionHeading eyebrow="Privacidad" label="Tratamiento básico de datos de contacto" />
+      <div class="space-y-6 text-body text-slate leading-relaxed -mt-4">
+        <p>
+          Los datos enviados mediante formularios, correo o WhatsApp se usan únicamente para responder consultas, coordinar reuniones y preparar propuestas relacionadas con los servicios de Sinergiza.
+        </p>
+        <p>
+          No compartimos esta información con terceros salvo que sea necesario para la operación técnica del servicio o exista obligación legal.
+        </p>
+        <p>
+          Si quieres solicitar actualización o eliminación de tus datos, puedes escribir a hablemos@sinergiza.cl.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

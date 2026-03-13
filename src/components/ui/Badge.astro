@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  variant?: 'default' | 'signal' | 'acid';
+}
+
+const { label, variant = 'default' } = Astro.props;
+
+const variants = {
+  default: 'chip',
+  signal: 'chip-muted',
+};
+---
+
+<span class:list={[
+  variants[variant],
+]}>
+  {label}
+</span>

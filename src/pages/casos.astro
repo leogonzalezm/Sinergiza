@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import FadeIn from '../components/motion/FadeIn.tsx';
+
+const cases = [
+  {
+    title: 'Portal de gestión interna',
+    challenge: 'La operación dependía de procesos manuales, aprobaciones por correo y poca trazabilidad.',
+    approach: 'Diseño de portal con roles, estados, métricas y automatización de tareas críticas.',
+    stack: 'React, Node.js, PostgreSQL',
+  },
+  {
+    title: 'Ecommerce conectado a sistemas comerciales',
+    challenge: 'El sitio vendía, pero inventario, pedidos y seguimiento comercial quedaban fragmentados.',
+    approach: 'Integración de catálogo, pagos, CRM y flujos operativos para reducir fricción entre venta y entrega.',
+    stack: 'WooCommerce, APIs, HubSpot, Stripe',
+  },
+  {
+    title: 'Asistente IA para conocimiento interno',
+    challenge: 'El equipo perdía tiempo buscando respuestas en manuales, PDFs y documentos dispersos.',
+    approach: 'Base de conocimiento consultable con IA para resolver dudas y reducir tiempos de respuesta.',
+    stack: 'Python, OpenAI, RAG',
+  },
+];
+---
+
+<Layout title="Casos" description="Ejemplos del tipo de soluciones digitales que diseñamos y desarrollamos en Sinergiza.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <FadeIn client:load>
+        <SectionHeading eyebrow="Casos" label="Ejemplos del tipo de soluciones que solemos construir" />
+        <p class="text-body-lg text-slate max-w-2xl -mt-4">
+          Estos casos muestran formatos de proyecto representativos. El objetivo es que puedas reconocer patrones, complejidad y tipo de enfoque antes de conversar.
+        </p>
+      </FadeIn>
+    </div>
+  </section>
+
+  <section class="pb-[var(--spacing-section)]">
+    <div class="container-narrow space-y-6">
+      {cases.map((item, index) => (
+        <FadeIn client:load delay={index * 0.07}>
+          <article class="p-8 surface-box">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-3">{item.stack}</p>
+            <h2 class="text-h3 font-heading font-semibold mb-4">{item.title}</h2>
+            <p class="text-body text-slate leading-relaxed mb-3"><strong class="text-carbon">Desafío:</strong> {item.challenge}</p>
+            <p class="text-body text-slate leading-relaxed"><strong class="text-carbon">Enfoque:</strong> {item.approach}</p>
+          </article>
+        </FadeIn>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-padding bg-signal text-white">
+    <div class="container-narrow text-center">
+      <FadeIn client:load>
+        <h2 class="text-h2 font-heading font-bold text-white mb-4">¿Tu caso se parece a alguno de estos?</h2>
+        <p class="text-body-lg text-white/80 max-w-xl mx-auto mb-8">
+          Si reconoces el patrón, probablemente podemos ayudarte a definir la mejor ruta de implementación.
+        </p>
+        <a href="/contacto" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-signal font-semibold rounded-[var(--radius-lg)] hover:bg-ivory transition-colors">
+          Agendar diagnóstico
+        </a>
+      </FadeIn>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

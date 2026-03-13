@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Badge from '../components/ui/Badge.astro';
+import FadeIn from '../components/motion/FadeIn.tsx';
+---
+
+<Layout title="Contacto" description="Agenda un diagnóstico gratuito. Analizamos tu proyecto y te proponemos el enfoque tecnológico adecuado.">
+  <Header slot="header" />
+
+  <section class="pt-12 pb-12 bg-ivory">
+    <div class="container-narrow">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+        <!-- Form -->
+        <div class="lg:col-span-3">
+          <FadeIn client:load>
+            <Badge label="Diagnóstico gratuito" variant="signal" />
+            <h1 class="text-h1 font-heading font-bold mt-4 mb-4 text-balance">
+              Cuéntanos sobre tu proyecto
+            </h1>
+            <p class="text-body-lg text-slate mb-4 max-w-xl">
+              Completa este formulario y te ayudamos a convertir una idea difusa en una conversación útil. Puedes enviarlo por WhatsApp o por email con el resumen ya armado.
+            </p>
+            <p class="text-small text-slate mb-10 uppercase tracking-[0.18em] font-medium">
+              Tiempo estimado: 2 minutos
+            </p>
+
+            <form class="space-y-6" id="contact-form">
+              <div class="p-5 surface-box">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-4">1. Contexto</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="name" class="block text-small font-medium mb-1.5">Nombre</label>
+                    <input
+                      type="text" id="name" name="name" required
+                      class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body placeholder:text-slate-light focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      placeholder="Tu nombre"
+                    />
+                  </div>
+                  <div>
+                    <label for="email" class="block text-small font-medium mb-1.5">Email</label>
+                    <input
+                      type="email" id="email" name="email" required
+                      class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body placeholder:text-slate-light focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      placeholder="tu@empresa.cl"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label for="company" class="block text-small font-medium mb-1.5">Empresa <span class="text-slate-light">(opcional)</span></label>
+                    <input
+                      type="text" id="company" name="company"
+                      class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body placeholder:text-slate-light focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      placeholder="Nombre de tu empresa"
+                    />
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-small font-medium mb-1.5">Teléfono <span class="text-slate-light">(opcional)</span></label>
+                    <input
+                      type="tel" id="phone" name="phone"
+                      class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body placeholder:text-slate-light focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      placeholder="+56 9 1234 5678"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-5 surface-box">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-4">2. Alcance</p>
+                <div class="space-y-4">
+                  <div>
+                    <label for="project-type" class="block text-small font-medium mb-1.5">¿Qué tipo de solución necesitas?</label>
+                    <select
+                      id="project-type" name="project-type" required
+                      class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                    >
+                      <option value="" disabled selected>Selecciona una opción</option>
+                      <option value="Aplicación web / desarrollo a medida">Aplicación web / desarrollo a medida</option>
+                      <option value="Solución con inteligencia artificial">Solución con inteligencia artificial</option>
+                      <option value="Integraciones y automatización">Integraciones y automatización</option>
+                      <option value="Ecommerce / tienda online">Ecommerce / tienda online</option>
+                      <option value="Sitio web corporativo">Sitio web corporativo</option>
+                      <option value="Rediseño UX/UI">Rediseño UX/UI</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="budget" class="block text-small font-medium mb-1.5">Rango de presupuesto estimado</label>
+                      <select
+                        id="budget" name="budget"
+                        class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      >
+                        <option value="No estoy seguro" selected>No estoy seguro</option>
+                        <option value="Menos de $1.000.000 CLP">Menos de $1.000.000 CLP</option>
+                        <option value="$1.000.000 – $3.000.000 CLP">$1.000.000 – $3.000.000 CLP</option>
+                        <option value="$3.000.000 – $5.000.000 CLP">$3.000.000 – $5.000.000 CLP</option>
+                        <option value="$5.000.000 – $10.000.000 CLP">$5.000.000 – $10.000.000 CLP</option>
+                        <option value="Más de $10.000.000 CLP">Más de $10.000.000 CLP</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="timeline" class="block text-small font-medium mb-1.5">¿Para cuándo lo necesitas?</label>
+                      <select
+                        id="timeline" name="timeline"
+                        class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors"
+                      >
+                        <option value="No definido todavía" selected>No definido todavía</option>
+                        <option value="Lo antes posible">Lo antes posible</option>
+                        <option value="Dentro de 1 mes">Dentro de 1 mes</option>
+                        <option value="Dentro de 2-3 meses">Dentro de 2-3 meses</option>
+                        <option value="Más adelante">Más adelante</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-5 surface-box">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-4">3. Objetivo</p>
+                <div>
+                  <label for="message" class="block text-small font-medium mb-1.5">Cuéntanos sobre tu proyecto</label>
+                  <textarea
+                    id="message" name="message" rows="5" required
+                    class="w-full px-4 py-3 rounded-[var(--radius-lg)] border border-border bg-surface text-carbon text-body placeholder:text-slate-light focus:outline-none focus:ring-2 focus:ring-signal/30 focus:border-signal transition-colors resize-y"
+                    placeholder="¿Qué problema quieres resolver? ¿Qué resultado esperas? ¿Hay algo que hoy esté frenando al negocio?"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                <button
+                  type="submit"
+                  class="w-full sm:w-auto px-8 py-3 bg-signal text-white font-semibold rounded-[var(--radius-lg)] hover:bg-signal-dark transition-colors text-body"
+                >
+                  Continuar por WhatsApp
+                </button>
+                <button
+                  type="button"
+                  id="email-fallback"
+                  class="w-full sm:w-auto px-8 py-3 border border-border bg-surface text-carbon font-semibold rounded-[var(--radius-lg)] hover:border-signal/30 hover:text-signal transition-colors text-body"
+                >
+                  Prefiero enviarlo por email
+                </button>
+              </div>
+
+              <p id="contact-status" class="text-xs text-slate-light">
+                Te responderemos en menos de 24 horas hábiles. Si prefieres, también puedes escribir directamente a WhatsApp o email.
+              </p>
+            </form>
+          </FadeIn>
+        </div>
+
+        <div class="lg:col-span-2">
+          <FadeIn client:load delay={0.1}>
+            <div class="sticky top-24 space-y-8">
+              <div class="p-6 surface-box">
+                <h3 class="text-h4 font-heading font-semibold mb-4">También puedes ir más rápido</h3>
+                <ul class="space-y-3 text-small text-slate">
+                  <li>
+                    <span class="font-medium text-carbon block">WhatsApp</span>
+                    <a href="https://wa.me/56963065167" class="text-signal hover:text-signal-dark transition-colors" target="_blank" rel="noopener noreferrer">
+                      +56 9 6306 5167
+                    </a>
+                  </li>
+                  <li>
+                    <span class="font-medium text-carbon block">Email</span>
+                    <a href="mailto:hablemos@sinergiza.cl" class="text-signal hover:text-signal-dark transition-colors">
+                      hablemos@sinergiza.cl
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="p-6 surface-box">
+                <h3 class="text-h4 font-heading font-semibold mb-4">Qué esperar</h3>
+                <ol class="space-y-3 text-small text-slate">
+                  <li class="flex gap-3">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-signal/10 text-signal text-xs font-bold shrink-0">1</span>
+                    <span>Leemos tu contexto antes de conversar para no partir desde cero.</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-signal/10 text-signal text-xs font-bold shrink-0">2</span>
+                    <span>Sesión de 30 minutos para entender objetivos, restricciones y prioridades.</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-signal/10 text-signal text-xs font-bold shrink-0">3</span>
+                    <span>Feedback honesto sobre enfoque, stack recomendado y nivel de complejidad.</span>
+                  </li>
+                  <li class="flex gap-3">
+                    <span class="flex items-center justify-center w-6 h-6 rounded-full bg-signal/10 text-signal text-xs font-bold shrink-0">4</span>
+                    <span>Si hay match, armamos propuesta formal con alcance, etapas y presupuesto.</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div class="p-6 rounded-[var(--radius-xl)] bg-carbon text-white">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal-light mb-3">Qué proyectos califican mejor</p>
+                <ul class="space-y-3 text-small text-white/70">
+                  <li>Empresas que necesitan digitalizar o automatizar procesos.</li>
+                  <li>Equipos que requieren un sitio o plataforma con lógica propia.</li>
+                  <li>Negocios que quieren explorar IA con un caso de uso concreto.</li>
+                </ul>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const emailFallback = document.getElementById('email-fallback');
+  const status = document.getElementById('contact-status');
+
+  const buildMessage = () => {
+    const formData = new FormData(form);
+    const payload = {
+      nombre: formData.get('name')?.toString().trim() || '',
+      email: formData.get('email')?.toString().trim() || '',
+      empresa: formData.get('company')?.toString().trim() || 'No indicada',
+      telefono: formData.get('phone')?.toString().trim() || 'No indicado',
+      tipo: formData.get('project-type')?.toString().trim() || 'No indicado',
+      presupuesto: formData.get('budget')?.toString().trim() || 'No definido',
+      plazo: formData.get('timeline')?.toString().trim() || 'No definido',
+      mensaje: formData.get('message')?.toString().trim() || '',
+    };
+
+    return {
+      payload,
+      text: [
+        'Hola, quiero agendar un diagnóstico con Sinergiza.',
+        '',
+        `Nombre: ${payload.nombre}`,
+        `Email: ${payload.email}`,
+        `Empresa: ${payload.empresa}`,
+        `Teléfono: ${payload.telefono}`,
+        `Tipo de proyecto: ${payload.tipo}`,
+        `Presupuesto: ${payload.presupuesto}`,
+        `Plazo: ${payload.plazo}`,
+        '',
+        'Contexto:',
+        payload.mensaje,
+      ].join('\n'),
+    };
+  };
+
+  const validateForm = () => {
+    if (!(form instanceof HTMLFormElement)) {
+      return false;
+    }
+    if (!form.reportValidity()) {
+      status.textContent = 'Revisa los campos requeridos antes de continuar.';
+      status.className = 'text-xs text-red-600';
+      return false;
+    }
+    return true;
+  };
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
+    const { text } = buildMessage();
+    window.open(`https://wa.me/56963065167?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    status.textContent = 'Abrimos WhatsApp con el resumen de tu proyecto listo para enviar.';
+    status.className = 'text-xs text-signal';
+  });
+
+  emailFallback?.addEventListener('click', () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const { payload, text } = buildMessage();
+    const subject = `Consulta Sinergiza: ${payload.tipo}`;
+    window.location.href = `mailto:hablemos@sinergiza.cl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+    status.textContent = 'Abrimos tu cliente de correo con el resumen del proyecto.';
+    status.className = 'text-xs text-signal';
+  });
+</script>
