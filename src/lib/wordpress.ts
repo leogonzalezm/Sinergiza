@@ -132,7 +132,7 @@ interface WordPressCasePost {
     resultado?: string;
     stack?: string | string[];
     industria?: string;
-    url_proyecto?: string;
+    url?: string;
   };
   _embedded?: {
     'wp:featuredmedia'?: WordPressEmbeddedMedia[];
@@ -166,7 +166,7 @@ function normalizeCase(post: WordPressCasePost): Case {
     result: post.acf.resultado || undefined,
     stack: Array.isArray(post.acf.stack) ? post.acf.stack.join(', ') : (post.acf.stack || ''),
     industry: post.acf.industria || undefined,
-    projectUrl: post.acf.url_proyecto || undefined,
+    projectUrl: post.acf.url || undefined,
     coverImage: featuredMedia?.source_url
       ? { url: featuredMedia.source_url, alt: featuredMedia.alt_text || title }
       : undefined,
