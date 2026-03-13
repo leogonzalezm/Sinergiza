@@ -4,27 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import FadeIn from '../components/motion/FadeIn.tsx';
+import { getCases } from '../lib/wordpress';
 
-const cases = [
-  {
-    title: 'Portal de gestión interna',
-    challenge: 'La operación dependía de procesos manuales, aprobaciones por correo y poca trazabilidad.',
-    approach: 'Diseño de portal con roles, estados, métricas y automatización de tareas críticas.',
-    stack: 'React, Node.js, PostgreSQL',
-  },
-  {
-    title: 'Ecommerce conectado a sistemas comerciales',
-    challenge: 'El sitio vendía, pero inventario, pedidos y seguimiento comercial quedaban fragmentados.',
-    approach: 'Integración de catálogo, pagos, CRM y flujos operativos para reducir fricción entre venta y entrega.',
-    stack: 'WooCommerce, APIs, HubSpot, Stripe',
-  },
-  {
-    title: 'Asistente IA para conocimiento interno',
-    challenge: 'El equipo perdía tiempo buscando respuestas en manuales, PDFs y documentos dispersos.',
-    approach: 'Base de conocimiento consultable con IA para resolver dudas y reducir tiempos de respuesta.',
-    stack: 'Python, OpenAI, RAG',
-  },
-];
+const cases = await getCases();
 ---
 
 <Layout title="Casos" description="Ejemplos del tipo de soluciones digitales que diseñamos y desarrollamos en Sinergiza.">
@@ -43,16 +25,36 @@ const cases = [
 
   <section class="pb-[var(--spacing-section)]">
     <div class="container-narrow space-y-6">
-      {cases.map((item, index) => (
-        <FadeIn client:load delay={index * 0.07}>
-          <article class="p-8 surface-box">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal mb-3">{item.stack}</p>
-            <h2 class="text-h3 font-heading font-semibold mb-4">{item.title}</h2>
-            <p class="text-body text-slate leading-relaxed mb-3"><strong class="text-carbon">Desafío:</strong> {item.challenge}</p>
-            <p class="text-body text-slate leading-relaxed"><strong class="text-carbon">Enfoque:</strong> {item.approach}</p>
-          </article>
-        </FadeIn>
-      ))}
+      {cases.length > 0 ? (
+        cases.map((item, index) => (
+          <FadeIn client:load delay={index * 0.07}>
+            <article class="p-8 surface-box">
+              <div class="flex items-center gap-3 mb-3">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-signal">{item.stack}</p>
+                {item.industry && <span class="chip-muted text-xs">{item.industry}</span>}
+              </div>
+              {item.coverImage?.url && (
+                <div class="aspect-[16/9] overflow-hidden rounded-[var(--radius-lg)] mb-5">
+                  <img src={item.coverImage.url} alt={item.coverImage.alt || item.title} class="w-full h-full object-cover" loading="lazy" />
+                </div>
+              )}
+              <h2 class="text-h3 font-heading font-semibold mb-4">{item.title}</h2>
+              <p class="text-body text-slate leading-relaxed mb-3"><strong class="text-carbon">Desafío:</strong> {item.challenge}</p>
+              <p class="text-body text-slate leading-relaxed mb-3"><strong class="text-carbon">Solución:</strong> {item.solution}</p>
+              {item.result && <p class="text-body text-slate leading-relaxed mb-3"><strong class="text-carbon">Resultado:</strong> {item.result}</p>}
+              {item.projectUrl && (
+                <a href={item.projectUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-signal text-small font-medium hover:underline mt-2">
+                  Ver proyecto →
+                </a>
+              )}
+            </article>
+          </FadeIn>
+        ))
+      ) : (
+        <div class="p-8 surface-box text-center">
+          <p class="text-body text-slate">Próximamente publicaremos casos de ejemplo.</p>
+        </div>
+      )}
     </div>
   </section>
 

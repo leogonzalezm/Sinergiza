@@ -121,6 +121,70 @@ export async function getArticle(slug: string): Promise<Article | null> {
   }
 }
 
+// --- Cases (Custom Post Type) ---
+
+interface WordPressCasePost {
+  id: number;
+  title: WordPressRenderedField;
+  acf: {
+    desafio?: string;
+    solucion?: string;
+    resultado?: string;
+    stack?: string;
+    industria?: string;
+    url_proyecto?: string;
+  };
+  _embedded?: {
+    'wp:featuredmedia'?: WordPressEmbeddedMedia[];
+  };
+}
+
+export interface Case {
+  id: number;
+  title: string;
+  challenge: string;
+  solution: string;
+  result?: string;
+  stack: string;
+  industry?: string;
+  projectUrl?: string;
+  coverImage?: {
+    url: string;
+    alt: string;
+  };
+}
+
+function normalizeCase(post: WordPressCasePost): Case {
+  const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
+  const title = decodeEntities(stripHtml(post.title.rendered));
+
+  return {
+    id: post.id,
+    title,
+    challenge: post.acf.desafio || '',
+    solution: post.acf.solucion || '',
+    result: post.acf.resultado || undefined,
+    stack: post.acf.stack || '',
+    industry: post.acf.industria || undefined,
+    projectUrl: post.acf.url_proyecto || undefined,
+    coverImage: featuredMedia?.source_url
+      ? { url: featuredMedia.source_url, alt: featuredMedia.alt_text || title }
+      : undefined,
+  };
+}
+
+export async function getCases(): Promise<Case[]> {
+  if (!isConfigured) return [];
+
+  try {
+    const posts = await fetchWordPress<WordPressCasePost[]>('/casos?_embed&per_page=100');
+    return posts.map(normalizeCase);
+  } catch (error) {
+    console.error('WordPress getCases failed:', error);
+    return [];
+  }
+}
+
 export async function getAllSlugs(): Promise<{ slug: string }[]> {
   if (!isConfigured) return [];
 

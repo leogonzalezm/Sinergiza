@@ -73,26 +73,9 @@ const businessOutcomes = [
   },
 ];
 
-const featuredCases = [
-  {
-    title: 'Portal operativo con roles y trazabilidad',
-    challenge: 'La operación dependía de planillas, correos cruzados y seguimiento manual de estados.',
-    outcome: 'Diseño de un portal interno con permisos, historial, aprobaciones y visibilidad operativa en tiempo real.',
-    stack: 'React, Node.js, PostgreSQL',
-  },
-  {
-    title: 'Integración comercial entre web, CRM y pagos',
-    challenge: 'Leads, seguimiento y pagos quedaban repartidos entre herramientas inconexas.',
-    outcome: 'Flujo integrado para captación, seguimiento comercial y conciliación automática de pagos.',
-    stack: 'APIs, Webhooks, HubSpot, Stripe',
-  },
-  {
-    title: 'Asistente IA para soporte interno',
-    challenge: 'El equipo perdía tiempo buscando manuales, políticas y respuestas repetidas en múltiples documentos.',
-    outcome: 'Asistente con base de conocimiento y recuperación contextual para responder más rápido y con menos ruido.',
-    stack: 'OpenAI, Python, RAG',
-  },
-];
+import { getCases } from '../lib/wordpress';
+const allCases = await getCases();
+const featuredCases = allCases.slice(0, 3);
 
 const processSteps = [
   { step: '01', title: 'Descubrimiento', description: 'Entendemos tu negocio, tus procesos y tus objetivos antes de proponer herramientas o presupuestos.' },
@@ -255,20 +238,26 @@ const faqs = [
         </div>
       </FadeIn>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-        {featuredCases.map((item, index) => (
-          <FadeIn client:load delay={index * 0.08}>
-            <article class="relative h-full p-6 surface-box-dark overflow-hidden">
-              <span class="chip-dark mb-3">{item.stack}</span>
-              <h3 class="text-h4 font-heading font-semibold text-white mb-3">{item.title}</h3>
-              <p class="text-small text-white/60 leading-relaxed mb-4">
-                <strong class="text-white">Desafío:</strong> {item.challenge}
-              </p>
-              <p class="text-small text-white/70 leading-relaxed">
-                <strong class="text-white">Enfoque:</strong> {item.outcome}
-              </p>
-            </article>
-          </FadeIn>
-        ))}
+        {featuredCases.length > 0 ? (
+          featuredCases.map((item, index) => (
+            <FadeIn client:load delay={index * 0.08}>
+              <article class="relative h-full p-6 surface-box-dark overflow-hidden">
+                <span class="chip-dark mb-3">{item.stack}</span>
+                <h3 class="text-h4 font-heading font-semibold text-white mb-3">{item.title}</h3>
+                <p class="text-small text-white/60 leading-relaxed mb-4">
+                  <strong class="text-white">Desafío:</strong> {item.challenge}
+                </p>
+                <p class="text-small text-white/70 leading-relaxed">
+                  <strong class="text-white">Solución:</strong> {item.solution}
+                </p>
+              </article>
+            </FadeIn>
+          ))
+        ) : (
+          <div class="lg:col-span-3 p-6 surface-box-dark text-center">
+            <p class="text-small text-white/60">Próximamente publicaremos casos de ejemplo.</p>
+          </div>
+        )}
       </div>
       <FadeIn client:load delay={0.2}>
         <div class="mt-10">
