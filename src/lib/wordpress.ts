@@ -130,7 +130,7 @@ interface WordPressCasePost {
     desafio?: string;
     solucion?: string;
     resultado?: string;
-    stack?: string;
+    stack?: string | string[];
     industria?: string;
     url_proyecto?: string;
   };
@@ -164,7 +164,7 @@ function normalizeCase(post: WordPressCasePost): Case {
     challenge: post.acf.desafio || '',
     solution: post.acf.solucion || '',
     result: post.acf.resultado || undefined,
-    stack: post.acf.stack || '',
+    stack: Array.isArray(post.acf.stack) ? post.acf.stack.join(', ') : (post.acf.stack || ''),
     industry: post.acf.industria || undefined,
     projectUrl: post.acf.url_proyecto || undefined,
     coverImage: featuredMedia?.source_url
